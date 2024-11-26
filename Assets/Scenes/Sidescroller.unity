@@ -1694,6 +1694,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  apexHeight: 2
+  apexTime: 0.5
+  terminalSpeed: -10
+  coyoteTime: 0.2
 --- !u!4 &1433354315
 Transform:
   m_ObjectHideFlags: 0
