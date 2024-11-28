@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     public float moveSpeed = 5f;
+    public float gravityStrength = -9f;
     public float apexHeight = 2f;
     public float apexTime = 0.5f;
-    private bool isJumping = false;
-    public float terminalSpeed = -10f;
+    public float terminalSpeed = -5f;
 
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter = 0f;
+
+    public LayerMask groundLayer;
+    public float groundCheckRadius = 0.7f;
 
     void Start()
     {
@@ -50,15 +53,13 @@ public class PlayerController : MonoBehaviour
             {
                 float jumpVelocity = (2 * apexHeight) / apexTime;
                 rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
-                isJumping = true;
                 coyoteTimeCounter = 0;
             }
         }
 
-        if (isJumping && rb.velocity.y <= 0)
+        if (!IsGrounded())
         {
-            rb.gravityScale = 1;
-            isJumping = false;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + gravityStrength * Time.deltaTime);
         }
 
         if (rb.velocity.y < terminalSpeed)
@@ -74,7 +75,8 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Mathf.Abs(rb.velocity.y) < 0.01f;
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+        return hit != null;
     }
 
     public FacingDirection GetFacingDirection()
