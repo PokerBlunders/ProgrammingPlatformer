@@ -7020,10 +7020,9 @@ MonoBehaviour:
     m_Bits: 64
   wallDistance: 0.6
   magnetObject: {fileID: 1987394558}
-  magneticPullStrength: 50
+  magnetPullStrength: 40
   maxPullSpeed: 10
-  magneticParticles: {fileID: 1384675955}
-  particleSpeed: 1
+  magnetParticles: {fileID: 1384675955}
 --- !u!4 &1433354315
 Transform:
   m_ObjectHideFlags: 0
