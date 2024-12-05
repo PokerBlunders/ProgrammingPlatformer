@@ -12,13 +12,15 @@ public class PlayerVisuals : MonoBehaviour
     public SpriteRenderer bodyRenderer;
     public PlayerController playerController;
 
-    private int isWalkingHash, isGroundedHash;
+    private int isWalkingHash, isGroundedHash, isClimbingHash, isDeadHash;
 
     // Start is called before the first frame update
     void Start()
     {
         isWalkingHash = Animator.StringToHash("IsWalking");
         isGroundedHash = Animator.StringToHash("IsGrounded");
+        isClimbingHash = Animator.StringToHash("IsClimbing");
+        isDeadHash = Animator.StringToHash("IsDead");
     }
 
     // Update is called once per frame
@@ -32,6 +34,8 @@ public class PlayerVisuals : MonoBehaviour
     {
         animator.SetBool(isWalkingHash, playerController.IsWalking());
         animator.SetBool(isGroundedHash, playerController.IsGrounded());
+        animator.SetBool(isClimbingHash, playerController.IsClimbing());
+        animator.SetBool(isDeadHash, playerController.IsDead());
         switch (playerController.GetFacingDirection())
         {
             case PlayerController.FacingDirection.left:
